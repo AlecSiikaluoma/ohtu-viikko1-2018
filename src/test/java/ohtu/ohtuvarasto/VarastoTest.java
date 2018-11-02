@@ -65,4 +65,49 @@ public class VarastoTest {
         assertEquals(4, varasto.paljonkoMahtuu(), vertailuTarkkuus);
     }
 
+    @Test
+    public void otaLiika() {
+        varasto.lisaaVarastoon(8);
+        varasto.otaVarastosta(10);
+        assertEquals(varasto.getSaldo(), 0.0, vertailuTarkkuus);
+    }
+
+    @Test
+    public void lisaaLiika() {
+        varasto.lisaaVarastoon(12);
+        assertEquals(varasto.getSaldo(), 10, vertailuTarkkuus);
+    }
+
+    @Test
+    public void lisaaVaaraMaara() {
+        varasto.lisaaVarastoon(-1);
+        assertEquals(varasto.getSaldo(), 0, vertailuTarkkuus);
+    }
+
+    @Test
+    public void otaVaaraMaara() {
+        varasto.lisaaVarastoon(5);
+        varasto.otaVarastosta(-1);
+        assertEquals(varasto.getSaldo(), 5, vertailuTarkkuus);
+    }
+
+    @Test
+    public void vaaraTilavuus() {
+        Varasto v = new Varasto(-1);
+        assertEquals(varasto.getSaldo(), 0.0, vertailuTarkkuus);
+    }
+    
+
+    @Test
+    public void nollaAlkuTilavuus() {
+        Varasto v = new Varasto(-1, 3);
+        assertEquals(varasto.getSaldo(), 0, vertailuTarkkuus);
+    }
+
+    @Test
+    public void alleNollaAlkuSaldo() {
+        Varasto v = new Varasto(1, -3);
+        assertEquals(varasto.getSaldo(), 0, vertailuTarkkuus);
+    }
+
 }
